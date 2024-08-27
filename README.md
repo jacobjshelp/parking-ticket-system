@@ -5,3 +5,7 @@ The parking ticket system is a program that allows for customers to purchase a p
 ## Requirement 1
 
 The first customer wants a ticket machine that allows the customer to interact with it using the terminal. It should print out the possible duration values in the console, and allow the user to choose from them.
+
+## Requirement 2
+
+The second customer wants a ticket machine that allows the customer to interact with it by sending the wanted duration via an HTTP request over the internet and it can take any value that the customer wants.

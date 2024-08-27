@@ -3,6 +3,7 @@ import TicketMachine from "./TicketMachine";
 
 class App {
   async main() {
+    const type = process.env.MACHINE_TYPE;
     const currency = process.env.CURRENCY;
     const pricePerMinute = process.env.PRICE_PER_MINUTE;
 
@@ -11,8 +12,14 @@ class App {
     }
 
     const ticketMachine = new TicketMachine(currency, Number(pricePerMinute));
-    await ticketMachine.startInteraction();
-    ticketMachine.endInteraction();
+
+    if (type === "1") {
+      await ticketMachine.startInteractionConsole();
+      ticketMachine.endInteraction();
+    } else if (type === "2") {
+      await ticketMachine.startInteractionAPI();
+      ticketMachine.endInteractionAndCloseProgram();
+    }
   }
 }
 
