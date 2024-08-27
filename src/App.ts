@@ -19,6 +19,9 @@ class App {
     } else if (type === "2") {
       await ticketMachine.startInteractionAPI();
       ticketMachine.endInteractionAndCloseProgram();
+    } else if (type === "3") {
+      await ticketMachine.startInteractionReadFile();
+      ticketMachine.endInteractionReadFile();
     }
   }
 }

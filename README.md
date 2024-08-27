@@ -9,3 +9,7 @@ The first customer wants a ticket machine that allows the customer to interact w
 ## Requirement 2
 
 The second customer wants a ticket machine that allows the customer to interact with it by sending the wanted duration via an HTTP request over the internet and it can take any value that the customer wants.
+
+## Requirement 3
+
+The third customer wants a ticket machine that allows the customer to interact with it by entering the wanted duration into a text file and it can take any value that the customer wants. After the interaction, the program should of course clear out the content of the text file so it is ready for a new customer.
