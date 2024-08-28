@@ -1,6 +1,7 @@
 import "dotenv/config";
 import ITicketMachine from "./ITicketMachine";
 import TicketMachineConsole from "./TicketMachineConsole";
+import TicketMachineAPI from "./TicketMachineAPI";
 
 class App {
   async main() {
@@ -17,8 +18,7 @@ class App {
     if (type === "1") {
       ticketMachine = new TicketMachineConsole(currency, Number(pricePerMinute));
     } else if (type === "2") {
-      throw new Error("TODO this has not yet been implemented");
-      // ticketMachine = new TicketMachineAPI();
+      ticketMachine = new TicketMachineAPI(currency, Number(pricePerMinute));
     } else if (type === "3") {
       throw new Error("TODO this has not yet been implemented");
       // ticketMachine = new TicketMachineReadFile();

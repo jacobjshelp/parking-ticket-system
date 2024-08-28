@@ -1,31 +1,14 @@
-import express, { Request } from "express";
 import fs from "node:fs";
 
 export default class TicketMachine {
   private currency: string;
   private pricePerMinute: number;
-  private app = express();
-  private port = process.env.PORT || 3000;
+
   private timeout = 7;
 
   constructor(_currency: string, _pricePerMinute: number) {
     this.currency = _currency;
     this.pricePerMinute = _pricePerMinute;
-  }
-
-  async startInteractionAPI(): Promise<void> {
-    return new Promise<void>((resolve) => {
-      this.app.get("/:duration", (req: Request) => {
-        const duration = req.params.duration;
-        const price = this.calculatePrice(Number(duration));
-        this.displayPrice(price);
-        resolve();
-      });
-
-      this.app.listen(this.port, () => {
-        console.log(`To set the wanted duration please send a GET request to http://localhost:${this.port}/:duration`);
-      });
-    });
   }
 
   async startInteractionReadFile(): Promise<void> {
@@ -38,11 +21,6 @@ export default class TicketMachine {
     }
     const price = this.calculatePrice(duration);
     this.displayPrice(price);
-  }
-
-  endInteractionAndCloseProgram(): void {
-    console.log("Thank you for parking with us!");
-    process.exit();
   }
 
   endInteractionReadFile(): void {
