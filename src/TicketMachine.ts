@@ -1,4 +1,3 @@
-import { rawlist } from "@inquirer/prompts";
 import express, { Request } from "express";
 import fs from "node:fs";
 
@@ -12,12 +11,6 @@ export default class TicketMachine {
   constructor(_currency: string, _pricePerMinute: number) {
     this.currency = _currency;
     this.pricePerMinute = _pricePerMinute;
-  }
-
-  async startInteractionConsole() {
-    const duration = await this.askForDurationInConsole();
-    const price = this.calculatePrice(duration);
-    this.displayPrice(price);
   }
 
   async startInteractionAPI(): Promise<void> {
@@ -45,10 +38,6 @@ export default class TicketMachine {
     }
     const price = this.calculatePrice(duration);
     this.displayPrice(price);
-  }
-
-  endInteraction() {
-    console.log("Thank you for parking with us!");
   }
 
   endInteractionAndCloseProgram(): void {
@@ -91,19 +80,5 @@ export default class TicketMachine {
       console.error(err);
       return undefined;
     }
-  }
-
-  private async askForDurationInConsole() {
-    const answer = await rawlist({
-      message: "Select a duration",
-      choices: [
-        { name: "30 minutes", value: 30 },
-        { name: "1 hour", value: 60 },
-        { name: "2 hours", value: 120 },
-        { name: "4 hours", value: 240 },
-        { name: "8 hours", value: 480 },
-      ],
-    });
-    return answer;
   }
 }
