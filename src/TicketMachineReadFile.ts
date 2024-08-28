@@ -1,15 +1,9 @@
 import ITicketMachine from "./ITicketMachine";
 import fs from "node:fs";
+import TicketMachineBase from "./TicketMachineBase";
 
-export default class TicketMachineReadFile implements ITicketMachine {
-  private currency: string;
-  private pricePerMinute: number;
+export default class TicketMachineReadFile extends TicketMachineBase implements ITicketMachine {
   private timeout = 7;
-
-  constructor(_currency: string, _pricePerMinute: number) {
-    this.currency = _currency;
-    this.pricePerMinute = _pricePerMinute;
-  }
 
   async startInteraction(): Promise<void> {
     console.log("Enter your wanted parking duration in minutes in the file called duration.txt");
@@ -28,14 +22,6 @@ export default class TicketMachineReadFile implements ITicketMachine {
       console.log("Duration file has been reset");
       console.log("Thank you for parking with us!");
     });
-  }
-
-  private displayPrice(price: number) {
-    console.log(`The price will be ${price}${this.currency}`);
-  }
-
-  private calculatePrice(duration: number) {
-    return duration * this.pricePerMinute;
   }
 
   private sleep() {

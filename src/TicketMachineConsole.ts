@@ -1,15 +1,8 @@
 import { rawlist } from "@inquirer/prompts";
 import ITicketMachine from "./ITicketMachine";
+import TicketMachineBase from "./TicketMachineBase";
 
-export default class TicketMachineConsole implements ITicketMachine {
-  private currency: string;
-  private pricePerMinute: number;
-
-  constructor(_currency: string, _pricePerMinute: number) {
-    this.currency = _currency;
-    this.pricePerMinute = _pricePerMinute;
-  }
-
+export default class TicketMachineConsole extends TicketMachineBase implements ITicketMachine {
   async startInteraction() {
     const duration = await this.askForDurationInConsole();
     const price = this.calculatePrice(duration);
@@ -18,14 +11,6 @@ export default class TicketMachineConsole implements ITicketMachine {
 
   endInteraction() {
     console.log("Thank you for parking with us!");
-  }
-
-  private displayPrice(price: number) {
-    console.log(`The price will be ${price}${this.currency}`);
-  }
-
-  private calculatePrice(duration: number) {
-    return duration * this.pricePerMinute;
   }
 
   private async askForDurationInConsole() {
@@ -40,5 +25,9 @@ export default class TicketMachineConsole implements ITicketMachine {
       ],
     });
     return answer;
+  }
+
+  protected calculatePrice(duration: number): number {
+    return duration * this.pricePerMinute + 5;
   }
 }
